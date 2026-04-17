@@ -22,6 +22,7 @@ function showIntro() {
     console.log("");
 }
 
+
 function computerPlay() {
     const choices = ["Rock", "Paper", "Scissors"];
     const randomIndex = Math.floor(Math.random() * choices.length);
@@ -45,6 +46,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+
 function game() {
     showIntro();
 
@@ -61,21 +63,19 @@ function game() {
                 "\n\nChoose your weapon: Rock, Paper or Scissors"
             );
 
-            if (input === null) {
-                console.log("\n---------------------------------------------");
-                console.log("GAME TERMINATED: USER FLED THE BATTLEFIELD.");
-                console.log("ROBO-333: Running away, human? COWARDICE DETECTED.");
-                console.log("---------------------------------------------");
-                return; // Natychmiastowe przerwanie skryptu
+         
+            if (input === null || input.trim() === "") {
+                alert("ROBO-333 blocks the exit: You cannot withdraw now, human! The 5 rounds must be completed to decide the fate of the world.");
+                continue; // Repeats the prompt for the same round
             }
 
             let trimmed = input.toLowerCase().trim();
 
             if (trimmed === "rock" || trimmed === "paper" || trimmed === "scissors") {
                 playerSelection = trimmed;
-                break;
+                break; // Valid input received, proceed to play round
             } else {
-                alert("ROBO-333 sneers: That is not a valid weapon, human. Type Rock, Paper or Scissors.");
+                alert("ROBO-333 sneers: Trying to confuse me with invalid input? There is no escape. Type Rock, Paper or Scissors!");
             }
         }
 
@@ -101,7 +101,6 @@ function game() {
         console.log("CURRENT SCORE: YOU: " + playerScore + " | ROBO-333: " + computerScore);
     }
 
- 
     displayFinalResult(playerScore, computerScore);
 }
 
@@ -117,10 +116,10 @@ function displayFinalResult(playerScore, computerScore) {
     } else if (playerScore < computerScore) {
         console.log("ROBO-333 WINS... Humanity becomes a screensaver.");
     } else {
-        console.log("ITS A DRAW. The war continues another day...");
+        console.log("IT'S A DRAW. The war continues another day...");
     }
     console.log("---------------------------------------------");
 }
 
-
+// Start the game
 game();
