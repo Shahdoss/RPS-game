@@ -121,5 +121,4 @@ function displayFinalResult(playerScore, computerScore) {
     console.log("---------------------------------------------");
 }
 
-// Start the game
 game();
