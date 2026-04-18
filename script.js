@@ -1,9 +1,8 @@
-
 console.log("%cType game() to start playing!", "color: cyan; font-size: 16px; font-weight: bold;");
 
 function showIntro() {
     console.log("%c---------------------------------------------", "color: gray;");
-    console.log("%c   ROCK, PAPER, SCISSORS: RISE OF THE MACHINE ", "color: purple; font-weight: bold;");
+    console.log("%c    ROCK, PAPER, SCISSORS: RISE OF THE MACHINE ", "color: purple; font-weight: bold;");
     console.log("%c---------------------------------------------", "color: gray;");
     console.log("");
     console.log("%cINCOMING TRANSMISSION...", "color: orange;");
@@ -65,7 +64,6 @@ function game() {
             }
 
             let trimmed = input.toLowerCase().trim();
-
             if (trimmed === "rock" || trimmed === "paper" || trimmed === "scissors") {
                 playerSelection = trimmed;
                 break;
@@ -97,6 +95,13 @@ function game() {
     }
 
     displayFinalResult(playerScore, computerScore);
+    const playAgain = confirm("ROBO-333: Do you dare to challenge me again, human?");
+    if (playAgain) {
+        console.clear();
+        game();
+    } else {
+        console.log("%cROBO-333: Wise choice. Run while you still can.", "color: orange; font-weight: bold;");
+    }
 }
 
 function displayFinalResult(playerScore, computerScore) {
@@ -115,4 +120,3 @@ function displayFinalResult(playerScore, computerScore) {
     }
     console.log("%c---------------------------------------------", "color: gray;");
 }
-
