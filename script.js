@@ -1,3 +1,17 @@
+alert(
+`Welcome to ROBO-333: Rock, Paper, Scissors 👾
+
+To play:
+1. Open your browser console:
+   - Windows: Ctrl + Shift + J
+   - Mac: Cmd + Option + J
+
+2. Type: game()
+3. Press Enter
+
+Good luck... you'll need it 😈`
+);
+
 console.log("%cType game() to start playing!", "color: cyan; font-size: 16px; font-weight: bold;");
 
 function showIntro() {
@@ -55,25 +69,38 @@ function game() {
             let input = prompt(
                 "ROUND " + (i + 1) + " OF 5" +
                 "\nYOU: " + playerScore + "  |  ROBO-333: " + computerScore +
-                "\n\nChoose your weapon: Rock, Paper or Scissors"
+                "\n\nChoose your weapon: Rock, Paper or Scissors\n(Cancel to attempt escape 😏)"
             );
 
             if (input === null || input.trim() === "") {
-                alert("ROBO-333 blocks the exit: You cannot withdraw now, human! The 5 rounds must be completed to decide the fate of the world.");
-                continue;
+                const confirmExit = confirm(
+                    "ROBO-333: What’s wrong, human?\n" +
+                    "Scared of losing? 😈\n\n" +
+                    "Press OK to RUN AWAY...\n" +
+                    "Press Cancel to stay and fight."
+                );
+
+                if (confirmExit) {
+                    console.log("%cROBO-333: Pathetic. Humanity never stood a chance...", "color: red; font-weight: bold;");
+                    return; 
+                } else {
+                    continue;
+                }
             }
 
             let trimmed = input.toLowerCase().trim();
+
             if (trimmed === "rock" || trimmed === "paper" || trimmed === "scissors") {
                 playerSelection = trimmed;
                 break;
             } else {
-                alert("ROBO-333 sneers: Trying to confuse me with invalid input? There is no escape. Type Rock, Paper or Scissors!");
+                alert("ROBO-333 sneers: Trying to confuse me with invalid input? Type Rock, Paper or Scissors!");
             }
         }
 
         const computerSelection = computerPlay();
         const result = playRound(playerSelection, computerSelection);
+
         const playerCaps = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
         const computerCaps = computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1);
 
@@ -95,6 +122,7 @@ function game() {
     }
 
     displayFinalResult(playerScore, computerScore);
+
     const playAgain = confirm("ROBO-333: Do you dare to challenge me again, human?");
     if (playAgain) {
         console.clear();
@@ -118,5 +146,8 @@ function displayFinalResult(playerScore, computerScore) {
     } else {
         console.log("%cIT'S A DRAW. The war continues another day...", "color: orange;");
     }
+
     console.log("%c---------------------------------------------", "color: gray;");
 }
+
+window.game = game;
