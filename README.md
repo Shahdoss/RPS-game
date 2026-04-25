@@ -23,3 +23,6 @@ This is a browser-based Rock, Paper, Scissors game where the player must defeat 
 - Implemented a playRound function that returns the winner of each round.
 - Created a game function with a 5-round loop and final score reporting.
 - Focused on clean code, modular functions, and user experience.
+
+## Play Online
+You can play the live version of the game here: https://shahdoss.github.io/RPS-game/
