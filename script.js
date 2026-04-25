@@ -1,3 +1,4 @@
+// Initial alert with instructions for the user
 alert(
 `Welcome to ROBO-333: Rock, Paper, Scissors 👾
 
@@ -56,6 +57,40 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+
+function getPlayerChoice(round, playerScore, computerScore) {
+    let input = prompt(
+        "ROUND " + round + " OF 5" +
+        "\nYOU: " + playerScore + "  |  ROBO-333: " + computerScore +
+        "\n\nChoose your weapon: Rock, Paper or Scissors\n(Cancel to attempt escape 😏)"
+    );
+
+    if (input === null || input.trim() === "") {
+        const confirmExit = confirm(
+            "ROBO-333: What’s wrong, human?\n" +
+            "Scared of losing? 😈\n\n" +
+            "Press OK to RUN AWAY...\n" +
+            "Press Cancel to stay and fight."
+        );
+
+        if (confirmExit) {
+            return "EXIT_GAME"; 
+        } else {
+            return getPlayerChoice(round, playerScore, computerScore); 
+        }
+    }
+
+    let trimmed = input.toLowerCase().trim();
+
+    if (trimmed === "rock" || trimmed === "paper" || trimmed === "scissors") {
+        return trimmed;
+    } else {
+        alert("ROBO-333 sneers: That is not a valid weapon. Type Rock, Paper or Scissors!");
+        // Recursion instead of while loop
+        return getPlayerChoice(round, playerScore, computerScore); 
+    }
+}
+
 function game() {
     showIntro();
 
@@ -63,39 +98,12 @@ function game() {
     let computerScore = 0;
 
     for (let i = 0; i < 5; i++) {
-        let playerSelection = "";
+        // Using function call instead of 'while(true)' loop
+        let playerSelection = getPlayerChoice(i + 1, playerScore, computerScore);
 
-        while (true) {
-            let input = prompt(
-                "ROUND " + (i + 1) + " OF 5" +
-                "\nYOU: " + playerScore + "  |  ROBO-333: " + computerScore +
-                "\n\nChoose your weapon: Rock, Paper or Scissors\n(Cancel to attempt escape 😏)"
-            );
-
-            if (input === null || input.trim() === "") {
-                const confirmExit = confirm(
-                    "ROBO-333: What’s wrong, human?\n" +
-                    "Scared of losing? 😈\n\n" +
-                    "Press OK to RUN AWAY...\n" +
-                    "Press Cancel to stay and fight."
-                );
-
-                if (confirmExit) {
-                    console.log("%cROBO-333: Pathetic. Humanity never stood a chance...", "color: red; font-weight: bold;");
-                    return; 
-                } else {
-                    continue;
-                }
-            }
-
-            let trimmed = input.toLowerCase().trim();
-
-            if (trimmed === "rock" || trimmed === "paper" || trimmed === "scissors") {
-                playerSelection = trimmed;
-                break;
-            } else {
-                alert("ROBO-333 sneers: Trying to confuse me with invalid input? Type Rock, Paper or Scissors!");
-            }
+        if (playerSelection === "EXIT_GAME") {
+            console.log("%cROBO-333: Pathetic. Humanity never stood a chance...", "color: red; font-weight: bold;");
+            return; 
         }
 
         const computerSelection = computerPlay();
@@ -146,7 +154,6 @@ function displayFinalResult(playerScore, computerScore) {
     } else {
         console.log("%cIT'S A DRAW. The war continues another day...", "color: orange;");
     }
-
     console.log("%c---------------------------------------------", "color: gray;");
 }
 
